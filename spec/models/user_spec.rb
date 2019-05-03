@@ -20,6 +20,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:session_token) }
     it { should validate_length_of(:password).is_at_least(6) }
     it { should allow_value(nil).for(:password)}
+    it { should have_many(:goals)}
   end
 
   let!(:user) { create(:user) }

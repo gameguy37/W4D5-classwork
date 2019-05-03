@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
     def new
+        redirect_to user_url(current_user) if login?
         render :new
     end
 
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        enforce_login
         @user = User.find_by_id(params[:id])
         render :show
     end

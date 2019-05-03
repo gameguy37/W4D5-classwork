@@ -20,6 +20,11 @@ class User < ApplicationRecord
     after_initialize :ensure_session_token
     attr_reader :password
 
+    has_many :goals,
+        primary_key: :id,
+        foreign_key: :user_id,
+        class_name: :Goal
+
     def self.find_by_credentials(username, password)
         user = User.find_by_username(username)
         return unless user
@@ -47,5 +52,7 @@ class User < ApplicationRecord
 
     def reset_session_token
         self.session_token = self.class.generate_session_token
+        self.save!
+        self.session_token
     end
 end
