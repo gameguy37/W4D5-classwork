@@ -12,6 +12,7 @@
 
 FactoryBot.define do
   factory :user do
-    
+    username { Faker::Pokemon.name }
+    password { 'test123' }
   end
 end
